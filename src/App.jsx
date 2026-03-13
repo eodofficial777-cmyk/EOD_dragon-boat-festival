@@ -415,14 +415,14 @@ export default function App() {
       <main style={{ height: 'calc(100vh - 152px)', position: 'relative' }}>
         {/* HOME */}
         {view === 'home' && (
-          <div style={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ minHeight: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: 'radial-gradient(#0d9488 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none', zIndex: 0 }} />
 
             {/* 上排攤位 - 緊湊膠囊列 */}
             <BoothPillRow booths={booths.filter(b => b.side === 'top')} stamps={userData.stamps} onOpen={openBooth} side="top" />
 
             {/* ★ 河道賽況 - 絕對主角，佔滿剩餘空間 */}
-            <div style={{ flex: 1, minHeight: 0, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, minHeight: 0, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
               <WaveDivider color="#0d9488" />
               <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
                 <RiverRaceTracker teams={raceTeams} onFlagClick={setZoomFlagUrl} />
@@ -698,7 +698,7 @@ function RiverRaceTracker({ teams, onFlagClick }) {
       </div>
 
       {/* === Race lanes === */}
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: isMobile ? 6 : 6, padding: isMobile ? '0 8px' : '0 16px', justifyContent: sorted.length <= 4 ? 'center' : 'flex-start' }}>
+      <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', gap: isMobile ? 6 : 6, padding: isMobile ? '0 8px' : '0 16px', justifyContent: sorted.length <= 4 ? 'center' : 'flex-start' }}>
         {sorted.map((team, idx) => {
           const pos = calcRacePos(team);
           const isReturning = pos.dir === 'in' || pos.dir === 'finish';
@@ -948,12 +948,12 @@ function MiniSquareCard({ booth, stamped, onClick, delay = 0 }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        flexShrink: 0, width: 100, cursor: 'pointer', position: 'relative',
+        flexShrink: 0, width: 200, cursor: 'pointer', position: 'relative',
         animation: `fadeSlideUp 0.4s cubic-bezier(0.16,1,0.3,1) ${delay}ms both`,
       }}
     >
       <div style={{
-        width: 100, height: 100, borderRadius: 20, overflow: 'hidden', position: 'relative',
+        width: 200, height: 200, borderRadius: 20, overflow: 'hidden', position: 'relative',
         background: '#fff',
         boxShadow: hovered ? '0 8px 24px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.05)',
         border: stamped ? '2.5px solid rgba(16,185,129,0.35)' : '2.5px solid #fff',
