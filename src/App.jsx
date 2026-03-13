@@ -422,7 +422,7 @@ export default function App() {
             <BoothPillRow booths={booths.filter(b => b.side === 'top')} stamps={userData.stamps} onOpen={openBooth} side="top" />
 
             {/* ★ 河道賽況 - 絕對主角，佔滿剩餘空間 */}
-            <div style={{ flex: 1, minHeight: 0, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <div style={{ flex: 1, minHeight: 320, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
               <WaveDivider color="#0d9488" />
               <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
                 <RiverRaceTracker teams={raceTeams} onFlagClick={setZoomFlagUrl} />
