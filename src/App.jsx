@@ -415,7 +415,7 @@ export default function App() {
       <main style={{ height: 'calc(100vh - 152px)', position: 'relative' }}>
         {/* HOME */}
         {view === 'home' && (
-          <div style={{ minHeight: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: 'radial-gradient(#0d9488 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none', zIndex: 0 }} />
 
             {/* 上排攤位 - 緊湊膠囊列 */}
@@ -909,14 +909,16 @@ function RiverRaceTracker({ teams, onFlagClick }) {
 // ============================================================
 function BoothPillRow({ booths, stamps, onOpen, side }) {
   // 每次元件掛載時隨機打亂攤位順序
-  const shuffled = React.useMemo(() => {
+  const shuffledRef = useRef(null);
+  if (!shuffledRef.current || shuffledRef.current.length !== booths.length) {
     const arr = [...booths];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return arr;
-  }, [booths]);
+    shuffledRef.current = arr;
+  }
+  const shuffled = shuffledRef.current;
 
   if (!shuffled.length) return null;
   return (
