@@ -656,6 +656,8 @@ function RiverRaceTracker({ teams, onFlagClick }) {
     }));
     setParticles(prev => [...prev, ...newP]);
     setTimeout(() => setParticles(prev => prev.filter(p => !newP.find(n => n.id === p.id))), 1200);
+    // 寫入後端
+    apiPost({ action: 'cheer', teamId: String(teamId) }).catch(() => {});
   };
 
   if (!teams.length) {
