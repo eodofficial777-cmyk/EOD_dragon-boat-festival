@@ -85,7 +85,7 @@ const AVATAR_COLORS = ['#f87171','#fb923c','#fbbf24','#34d399','#22d3ee','#818cf
 function getAvatarColor(name) { let h = 0; for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h); return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length]; }
 
 const WaveDivider = ({ flip, color = '#0d9488' }) => (
-  <svg viewBox="0 0 1200 40" fill="none" className={`w-full ${flip ? 'rotate-180' : ''}`} style={{ display: 'block', width: '100%', marginBottom: flip ? 0 : -1, marginTop: flip ? -1 : 0 }}>
+  <svg viewBox="0 0 1200 40" fill="none" style={{ display: 'block', width: '100%', marginBottom: flip ? 0 : -1, marginTop: flip ? -1 : 0, transform: flip ? 'rotate(180deg)' : 'none' }}>
     <path d="M0 20C200 0 400 40 600 20C800 0 1000 40 1200 20V40H0V20Z" fill={color} fillOpacity="0.08" />
   </svg>
 );
@@ -422,7 +422,7 @@ export default function App() {
             <BoothPillRow booths={booths.filter(b => b.side === 'top')} stamps={userData.stamps} onOpen={openBooth} side="top" />
 
             {/* ★ 河道賽況 - 絕對主角，佔滿剩餘空間 */}
-            <div style={{ flex: 1, minHeight: 320, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <div style={{ flex: 1, minHeight: 320, zIndex: 5, position: 'relative', display: 'flex', flexDirection: 'column', overflowY: 'auto', background: 'rgba(13,148,136,0.07)' }}>
               <WaveDivider color="#0d9488" />
               <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
                 <RiverRaceTracker teams={raceTeams} onFlagClick={setZoomFlagUrl} />
